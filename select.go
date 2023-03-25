@@ -1,14 +1,19 @@
 package bprompt
 
-type Selector struct{
-	Prompt string
-	List []interface{}
-}
+import (
+	"os"
 
-func (s *Selector)Len()(int){
-	return len(s.List)
-}
+	"github.com/fatih/color"
+)
 
-func (s *Selector)Ask()(*Selector, error){
-	return &Selector{}, nil
+func Select(p string,  c ...any) *Selector{
+	return &Selector{
+		Writer: os.Stdout,
+		List: c,
+		Prompt: p,
+		PromptStyle: []color.Attribute{
+			color.FgRed,
+		},
+		
+	}
 }
